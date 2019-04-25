@@ -13,7 +13,7 @@ The first issue is called model-data mismatch, which is a fundamental problem co
 The rectification paradigm in this code provides a neat solution to handle model-data mismatch not making more complex models but transforming data to a point in the space of ideal posterior. 
 
 
-# reference
+# Reference
 [Main paper]
 - https://papers.nips.cc/paper/5970-robust-spectral-inference-for-joint-stochastic-matrix-factorization.pdf
 
