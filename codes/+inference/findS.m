@@ -30,7 +30,7 @@
 % Outputs:
 %   - S: 1xK vector having the indices corresponding to K approximate nonnegative basis vectors
 %   - diagR: 1xK vector indicating the scores of each basis vector
-%   - elapsedTime: Total elapsed amount of seconds
+%   - elapsedTime: total elapsed amount of seconds
 %
 % Remarks: 
 %   - This function performs QR-factorization with the row-pivoting, 
@@ -46,7 +46,7 @@ function [S, diagR, elapsedTime] = findS(Cbar, K, option)
     end
       
     % Print out the initial status.
-    fprintf('Start finding the set of anchor bases S...\n');     
+    fprintf('[inference.findS] Start finding the set of anchor bases S...\n');     
         
     % Start finding the given number of approximate basis vectors.
     startTime = tic;

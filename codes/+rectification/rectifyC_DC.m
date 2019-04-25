@@ -19,7 +19,7 @@
 % Outputs:
 %   - C: NxN co-occurrence matrix (low-rank)
 %   - values: TxN matrix where each row is the completed diagonal vector
-%   - elapsedTime: Total elapsed amount of seconds
+%   - elapsedTime: total elapsed amount of seconds
 %
 % Remarks: 
 %   - This function replaces diagonal entries of the co-occurrence matrix 
@@ -36,7 +36,7 @@ function [C, values, elapsedTime] = rectifyC_DC(C, K, T)
     N_half = floor(0.5*N);
     
     % Print out the initial status.
-    fprintf('Start rectifying C...\n');     
+    fprintf('[rectification.rectifyC_DC] Start rectifying C...\n');     
     startTime = tic;    
     
     % Start iteration.

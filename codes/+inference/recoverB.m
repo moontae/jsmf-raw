@@ -1,7 +1,7 @@
 %% 
 % Joint Stochastic Matrix Factorization (JSMF)
 %
-% Coded by: Moontae Lee 
+% Coded by: Moontae Lee
 % Examples:
 %   - [B, Btilde] = recoverB(Cbar, C_rowSums, S);
 %
@@ -11,9 +11,9 @@
 % Main: recoverB()
 %
 % Inputs:
-%   - Cbar     : NxN row-normalized co-occurrence matrix
+%   - Cbar: NxN row-normalized co-occurrence matrix
 %   - C_rowSums: Nx1 vector having sums of each row in original C matrix
-%   - S        : 1xK vector having the row indices of approximate basis vectors
+%   - S: 1xK vector having the row indices of approximate basis vectors
 %   + option:
 %     - expGrad: 
 %     - admmDR: 
@@ -25,9 +25,9 @@
 %   - y: Kx1 column vector, non-negative least square solution in the simplex
 %
 % Outputs:
-%   - B:      NxK object-cluster tall matrix where B_{nk} = p(X=n | Z=k) 
+%   - B: NxK object-cluster tall matrix where B_{nk} = p(X=n | Z=k) 
 %   - Btilde: KxN cluster-object fat matrix where Btilde_{kn} = p(Z=k | X=n) 
-%   - elapsedTime: Total elapsed amount of seconds
+%   - elapsedTime: total elapsed amount of seconds
 %
 function [B, Btilde, elapsedTime] = recoverB(Cbar, C_rowSums, S, option)
     % Set the default option.
@@ -48,7 +48,7 @@ function [B, Btilde, elapsedTime] = recoverB(Cbar, C_rowSums, S, option)
     UtU = Ut*U;    
     
     % Print out the initial status.
-    fprintf('Start recovering the object-cluster B...\n');
+    fprintf('[inference.recoverB] Start recovering the object-cluster B...\n');
     
     % Compute the Btilde (for each member object in parallel).    
     startTime = tic;
@@ -60,8 +60,8 @@ function [B, Btilde, elapsedTime] = recoverB(Cbar, C_rowSums, S, option)
     % Perform the main inference for the non-basis vectors.    
     switch (option)
       case 'expGrad'
-        % For each row (in parallel),
-        parfor n = 1:int32(N)
+        % For each row (replace for to parfor for parallel running),        
+        for n = 1:int32(N)
             % Skip the basis vectors.
             if any(n == S)
                 continue
@@ -89,8 +89,8 @@ function [B, Btilde, elapsedTime] = recoverB(Cbar, C_rowSums, S, option)
         % Precompute the invariant parts.
         F = inv(gamma*UtU + eye(K, K));        
                 
-        % For each row (in parallel), 
-        parfor n = 1:int32(N)
+        % For each row (replace for to parfor for parallel running),
+        for n = 1:int32(N)
             % Skip the basis vectors.
             if any(n == S)
                 continue
@@ -114,8 +114,8 @@ function [B, Btilde, elapsedTime] = recoverB(Cbar, C_rowSums, S, option)
         end        
            
       case 'activeSet'
-        % For each row (in parallel), 
-        parfor n = 1:int32(N)
+        % For each row (replace for to parfor for parallel running),
+        for n = 1:int32(N)
             % Skip the basis vectors.
             if any(n == S)
                 continue
